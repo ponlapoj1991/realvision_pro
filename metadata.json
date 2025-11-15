@@ -1,0 +1,5 @@
+{
+  "name": "Real Vision AI Chat",
+  "description": "A web application that replicates a professional AI chat interface for interacting with Gemini models. It features a clean, responsive layout with a sidebar, main chat area, and comparison view.",
+  "requestFramePermissions": []
+}
