@@ -93,8 +93,13 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message, scrollToBottom, onAn
                         ? 'bg-[#0057d8] text-white'
                         : 'bg-white text-[#667085] border border-gray-200'
                     }`}>
-                      <div className="prose prose-sm max-w-none prose-p:my-2 prose-headings:mt-4 prose-headings:mb-2 prose-ul:my-2 prose-ol:my-2 prose-li:my-0 prose-table:my-2 prose-th:bg-gray-50 prose-table:text-sm whitespace-pre-wrap">
-                        <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>
+                      <div className="prose prose-sm max-w-none prose-p:my-2 prose-p:whitespace-pre-wrap prose-headings:mt-4 prose-headings:mb-2 prose-ul:my-2 prose-ol:my-2 prose-li:my-0 prose-table:my-2 prose-th:bg-gray-50 prose-table:text-sm [&_p]:whitespace-pre-wrap [&_br]:block">
+                        <ReactMarkdown
+                          remarkPlugins={[remarkGfm, remarkBreaks]}
+                          components={{
+                            p: ({children}) => <p style={{whiteSpace: 'pre-wrap'}}>{children}</p>
+                          }}
+                        >
                           {message.text}
                         </ReactMarkdown>
                       </div>
