@@ -4,7 +4,7 @@ import ChatPanel from './ChatPanel';
 import { QuestionMarkIcon } from './icons/Icons';
 
 const ChatPlayground: React.FC = () => {
-  const [compareMode, setCompareMode] = useState(true);
+  const [compareMode, setCompareMode] = useState(false);
 
   return (
     <div className="h-full flex flex-col bg-[#f0f3f8]">
