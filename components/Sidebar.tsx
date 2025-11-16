@@ -40,14 +40,14 @@ const Sidebar: React.FC<SidebarProps> = ({ isCollapsed }) => {
             <li key={index}>
               <a
                 href={item.route}
-                className={`flex items-center h-[42px] px-2 rounded-md mb-1 transition-colors ${
+                className={`flex items-center h-[42px] px-2 rounded-md mb-1 transition-colors group ${
                   item.active
                     ? 'bg-[#1e22aa] text-white'
                     : 'text-[#61677d] hover:bg-[#1e22aa] hover:text-white'
                 }`}
                 title={isCollapsed ? item.title : ''}
               >
-                <div className={`w-[38px] h-[38px] flex items-center justify-center ${item.active ? '[&_svg]:brightness-0 [&_svg]:invert' : ''}`}>
+                <div className={`w-[38px] h-[38px] flex items-center justify-center ${item.active ? 'brightness-0 invert' : ''}`}>
                   {item.icon}
                 </div>
                 {!isCollapsed && (

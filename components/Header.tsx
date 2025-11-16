@@ -14,7 +14,7 @@ const Header: React.FC<HeaderProps> = ({ onToggleSidebar, isSidebarCollapsed }) 
         <div className={`flex items-center h-full transition-all duration-300 ${isSidebarCollapsed ? 'w-[72px]' : 'w-[228px]'}`}>
              <button
                 onClick={onToggleSidebar}
-                className="p-3 h-full flex items-center justify-center hover:bg-gray-100 transition-colors"
+                className="w-full h-full flex items-center justify-center hover:bg-gray-100 transition-colors"
                 title={isSidebarCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
               >
                 {isSidebarCollapsed ? <DoubleArrowRightIcon /> : <DoubleArrowLeftIcon />}

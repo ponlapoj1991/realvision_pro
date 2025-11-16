@@ -17,6 +17,18 @@ const modelOptions = [
   "gemini-flash-latest"
 ];
 
+const BASE_SYSTEM_INSTRUCTION = `You are a helpful and highly intelligent AI assistant named RealVision.
+
+แนวทางปฏิบัติในการตอบ:
+* ให้คำตอบที่ละเอียดและถูกต้องที่สุดเท่าที่จะเป็นไปได้
+* ใช้ภาษาไทย สุภาพ มืออาชีพ ใช้ "ครับ"
+* การขึ้นย่อหน้าใหม่ ให้เว้นบรรทัดว่าง 1 บรรทัด (เหมือนการกด Enter สองครั้ง)
+* ตัวอย่าง:
+ย่อหน้าที่หนึ่งจบตรงนี้
+
+ย่อหน้าที่สองเริ่มต้นที่นี่
+`;
+
 // Generates the system instruction for the "thinking" phase, based on the user's Apps Script.
 const generateThinkingSystemMessage = () => `
 <role>
@@ -102,7 +114,7 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ modelId }) => {
   }, []);
 
   useEffect(() => {
-    chatRef.current = startChat(selectedModel, "You are a helpful AI assistant named RealVision. Your responses should be formatted in Markdown.");
+    chatRef.current = startChat(selectedModel, BASE_SYSTEM_INSTRUCTION);
     setHistory([{ role: 'model', text: `Model ${modelId} changed to ${selectedModel}` }]);
   }, [selectedModel, modelId]);
   
@@ -149,18 +161,11 @@ const ChatPanel: React.FC<ChatPanelProps> = ({ modelId }) => {
             
             // --- Step 2: Get Final Answer ---
             const thinkingStepsText = steps.map((step, i) => `${i + 1}. ${step}`).join('\n');
-            const finalSystemInstruction = `You are a helpful and highly intelligent AI assistant named RealVision.
+            const finalSystemInstruction = `${BASE_SYSTEM_INSTRUCTION}
 CONTEXT: You have already formulated a strategic plan to answer the user's query. Your plan, for your reference only, was:
 ${thinkingStepsText}
 
-TASK: Now, provide a complete, well-structured, and detailed answer to the user's original request.
-
-RESPONSE GUIDELINES:
-- **Provide the most detailed and accurate answer possible.**
-- **Use standard Markdown for formatting.** Employ headings (#, ##), bullet points (*), numbered lists, and bold text to create a clear, well-structured, and easy-to-read response.
-- **Be comprehensive.** Address all parts of the user's prompt fully.
-- **Maintain a helpful and professional tone.**
-- **Do not repeat the thinking steps** or mention your internal plan in the final answer.`;
+TASK: Now, using your plan as a guide, provide the final answer to the user's original request. Adhere strictly to all response guidelines and DO NOT repeat the thinking steps in your answer.`;
             
             const finalAnswerChat = startChat(selectedModel, finalSystemInstruction);
             const result = await finalAnswerChat.sendMessageStream({ message: currentInput });
@@ -194,7 +199,7 @@ RESPONSE GUIDELINES:
   }, [userInput, isLoading, selectedModel, thinkingMode]);
 
   const handleClearChat = () => {
-      chatRef.current = startChat(selectedModel, "You are a helpful AI assistant named RealVision. Your responses should be formatted in Markdown.");
+      chatRef.current = startChat(selectedModel, BASE_SYSTEM_INSTRUCTION);
       setHistory([{ role: 'model', text: `Chat history cleared. Model is ${selectedModel}.` }]);
   };
   

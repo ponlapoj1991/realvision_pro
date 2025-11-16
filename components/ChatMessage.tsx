@@ -92,7 +92,7 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message, scrollToBottom, onAn
                         ? 'bg-[#0057d8] text-white'
                         : 'bg-white text-[#667085] border border-gray-200'
                     }`}>
-                      <div className="prose prose-sm max-w-none prose-p:my-2 prose-headings:my-3 prose-ul:my-2 prose-ol:my-2 prose-table:my-2 prose-th:bg-gray-50 prose-table:text-sm whitespace-pre-wrap">
+                      <div className="prose prose-sm max-w-none prose-p:my-2 prose-headings:mt-4 prose-headings:mb-2 prose-ul:my-2 prose-ol:my-2 prose-li:my-0 prose-table:my-2 prose-th:bg-gray-50 prose-table:text-sm">
                         <ReactMarkdown remarkPlugins={[remarkGfm]}>
                           {message.text}
                         </ReactMarkdown>
