@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import remarkBreaks from 'remark-breaks';
 import { Message } from '../types';
 import { RealVisionBotIcon, UserIcon } from './icons/Icons';
 import { ThinkingBox } from './ThinkingBox';
@@ -92,8 +93,8 @@ const ChatMessage: React.FC<ChatMessageProps> = ({ message, scrollToBottom, onAn
                         ? 'bg-[#0057d8] text-white'
                         : 'bg-white text-[#667085] border border-gray-200'
                     }`}>
-                      <div className="prose prose-sm max-w-none prose-p:my-2 prose-headings:mt-4 prose-headings:mb-2 prose-ul:my-2 prose-ol:my-2 prose-li:my-0 prose-table:my-2 prose-th:bg-gray-50 prose-table:text-sm">
-                        <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                      <div className="prose prose-sm max-w-none prose-p:my-2 prose-headings:mt-4 prose-headings:mb-2 prose-ul:my-2 prose-ol:my-2 prose-li:my-0 prose-table:my-2 prose-th:bg-gray-50 prose-table:text-sm whitespace-pre-wrap">
+                        <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>
                           {message.text}
                         </ReactMarkdown>
                       </div>
